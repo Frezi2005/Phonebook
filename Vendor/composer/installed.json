@@ -1,0 +1,50 @@
+[
+    {
+        "name": "cakephp/cakephp",
+        "version": "2.10.19",
+        "version_normalized": "2.10.19.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cakephp/cakephp.git",
+            "reference": "8f08a834747301656bbb4db6fe8c355d489261fe"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cakephp/cakephp/zipball/8f08a834747301656bbb4db6fe8c355d489261fe",
+            "reference": "8f08a834747301656bbb4db6fe8c355d489261fe",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "cakephp/cakephp-codesniffer": "^1.0.0",
+            "phpunit/phpunit": "^3.7"
+        },
+        "suggest": {
+            "ext-mcrypt": "You need to install ext-openssl or ext-mcrypt to use AES-256 encryption",
+            "ext-openssl": "You need to install ext-openssl or ext-mcrypt to use AES-256 encryption"
+        },
+        "time": "2019-07-25T01:32:25+00:00",
+        "bin": [
+            "lib/Cake/Console/cake"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "CakePHP Community",
+                "homepage": "https://github.com/cakephp/cakephp/graphs/contributors"
+            }
+        ],
+        "description": "The CakePHP framework",
+        "homepage": "https://cakephp.org",
+        "keywords": [
+            "framework"
+        ]
+    }
+]
