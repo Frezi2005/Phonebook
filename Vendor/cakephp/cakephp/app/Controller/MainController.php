@@ -28,7 +28,7 @@ App::uses('AppController', 'Controller');
  * @package       app.Controller
  * @link https://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
-class PagesController extends AppController {
+class MainController extends AppController {
 
 /**
  * This controller does not use a model
@@ -76,5 +76,13 @@ class PagesController extends AppController {
 			}
 			throw new NotFoundException();
 		}
+	}
+
+	public function home() {
+		echo "I'm in home";
+	}
+
+	public function contacts() {
+		echo "I'm in contacts";
 	}
 }
