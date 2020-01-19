@@ -30,5 +30,5 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class UserModel extends Model {
-    //Test12345
+    
 }

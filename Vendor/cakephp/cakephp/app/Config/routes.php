@@ -25,13 +25,21 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
-	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
-	Router::connect('/home', array('controller' => 'main', 'action' => 'home'));
+	Router::connect('/home', array('controller' => 'main', 'action' => 'home'));	
+	Router::connect('/about', array('controller' => 'main', 'action' => 'about'));
+	Router::connect('/contact', array('controller' => 'main', 'action' => 'contact'));
+
 	Router::connect('/contacts', array('controller' => 'main', 'action' => 'contacts'));
 	Router::connect('/login-form', array('controller' => 'user', 'action' => 'loginForm'));
 	Router::connect('/register-form', array('controller' => 'user', 'action' => 'registerForm'));
 	Router::connect('/login-user', array('controller' => 'user', 'action' => 'loginUser'));
+	Router::connect('/logout-user', array('controller' => 'user', 'action' => 'logoutUser'));
+	Router::connect('/delete-user', array('controller' => 'user', 'action' => 'deleteUser'));
 	Router::connect('/register-user', array('controller' => 'user', 'action' => 'registerUser'));
+	Router::connect('/add-contact', array('controller' => 'contact', 'action' => 'addContact'));
+	Router::connect('/remove-contact', array('controller' => 'contact', 'action' => 'removeContact'));
+	Router::connect('/edit-contact', array('controller' => 'contact', 'action' => 'editContact'));
+
 
 /**
  * ...and connect the rest of 'Pages' controller's URLs.

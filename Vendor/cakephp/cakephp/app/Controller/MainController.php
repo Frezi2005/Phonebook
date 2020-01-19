@@ -79,7 +79,21 @@ class MainController extends AppController {
 	}
 
 	public function home() {
-		echo "I'm in home";
+			
+		$this->layout = 'default';
+
+	}
+
+	public function about() {
+			
+		$this->layout = 'default';
+
+	}
+
+	public function contact() {
+			
+		$this->layout = 'default';
+
 	}
 
 	public function contacts() {

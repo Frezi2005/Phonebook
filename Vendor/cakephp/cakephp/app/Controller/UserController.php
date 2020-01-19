@@ -93,4 +93,13 @@ class UserController extends AppController {
 	public function registerUser() {
 		echo "I'm in registerUser()";
 	}
+
+	public function logoutUser() {
+		echo "I'm in logoutUser()";
+	}
+
+	public function deleteUser() {
+		echo "I'm in deleteUser()";
+	}
+
 }
