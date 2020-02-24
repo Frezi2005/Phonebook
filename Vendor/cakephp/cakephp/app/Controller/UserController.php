@@ -37,6 +37,17 @@ class UserController extends AppController {
  */
 	public $uses = array();
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->loadModel('User');
+		App::uses('CakeText', 'Utility');
+		if(empty($this->Session->Check('LoggedIn'))) {
+			$this->layout = 'default';
+		}			
+		else 
+			$this->layout = 'loggedIn';
+	}
+
 /**
  * Displays a view
  *
@@ -87,19 +98,64 @@ class UserController extends AppController {
 	}
 
 	public function loginUser() {
-		echo "I'm in loginUser()";
+
+		$userCredentials = $this->request->data['Login'];
+
+		if(!empty($this->User->find('first', array('conditions' => array('password' => $this->request->data['Login']['password'], 'username' => $this->request->data['Login']['login']))))) {
+			$user = $this->User->find('first', array('conditions' => array('password' => $this->request->data['Login']['password'], 'username' => $this->request->data['Login']['login'])));
+			$this->Session->write("LoggedIn", true);
+			$this->Session->write("uuid", $user['User']['uuid']);
+			$this->redirect("/profile");
+		} else {
+			$this->Session->write('loginError', 'Username or password is incorrect!');
+			$this->redirect("/home");
+		}
 	}
 
 	public function registerUser() {
-		echo "I'm in registerUser()";
+
+		$user = $this->request->data['Register'];
+
+		$this->User->save(array('id' => null, 'username' => $user['login'], 'password' => $user['password'], 'uuid' => CakeText::uuid()));
 	}
 
 	public function logoutUser() {
-		echo "I'm in logoutUser()";
+		$this->Session->delete("LoggedIn");
+
+		$this->Flash->set("You are logged out.");
+
+		$this->redirect("/home");
+
 	}
 
 	public function deleteUser() {
-		echo "I'm in deleteUser()";
+
+		$this->User->deleteAll(array('User.uuid' => $this->Session->read('uuid')), false);
+		$this->Session->delete("LoggedIn");
+
+		$this->Session->read('uuid');
+
+	}
+
+	public function changeLogin() {
+		
+		$login = isset($this->request->data['ChangeLogin']) ? $this->request->data['ChangeLogin'] : null ;
+
+		$this->set('login', $login);
+
+		$this->User->read(null, $_SESSION['uuid']);
+
+		if(isset($this->request->data['ChangeLogin'])) {
+			if(count($this->User->find('first', array('conditions' => array('username' => $login['newLogin'])))) == 0) {
+				$this->User->updateAll(
+					array('username' => "'".$login['newLogin']."'"), 
+					array('uuid' => $this->Session->read('uuid')));
+				$this->User->save();
+				$this->redirect("/profile");
+			} else {
+				echo "Username is not unique";
+			}
+		}
 	}
 
 }

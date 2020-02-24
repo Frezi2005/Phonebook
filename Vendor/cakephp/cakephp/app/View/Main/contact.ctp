@@ -9,13 +9,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php
 
         echo $this->Html->css('contact');
-        echo $this->Html->script('https://code.jquery.com/jquery-3.4.1.js');
-        echo $this->Html->script('main');
-        echo $this->Html->css('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
-        echo $this->Html->script('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js');
-        echo $this->Html->script('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js');
-        echo $this->Html->script("https://cdn.jsdelivr.net/npm/sweetalert2@9");
-        echo $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/granim/2.0.0/granim.js');
 
         echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -30,9 +23,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <div class="name">Phone Book</div>
             <hr class="horizontal-line">
             <div class="message">
-                Email: <a id="link" href="mailto:kamil.wan05@gmail.com">kamil.wan05@gmail.com</a><br/>
-                Facebook: <a id="link" href="https://www.facebook.com/kamil.waniczek.39">Kamil Waniczek</a><br/>
-                Messenger: Kamil Waniczek
+                <i class="fas fa-at"></i> Email: <a id="link" href="mailto:kamil.wan05@gmail.com">kamil.wan05@gmail.com</a><br/>
+                <i class="fab fa-facebook"></i> Facebook: <a id="link" target="_blank" href="https://www.facebook.com/kamil.waniczek.39">Kamil Waniczek</a><br/>
+                <i class="fab fa-facebook-messenger"></i> Messenger: Kamil Waniczek
             </div>
         </div>
     </div>

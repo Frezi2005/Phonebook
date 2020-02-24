@@ -9,13 +9,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php
 
         echo $this->Html->css('home');
-        echo $this->Html->script('https://code.jquery.com/jquery-3.4.1.js');
-        echo $this->Html->script('main');
-        echo $this->Html->css('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
-        echo $this->Html->script('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js');
-        echo $this->Html->script('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js');
-        echo $this->Html->script("https://cdn.jsdelivr.net/npm/sweetalert2@9");
-        echo $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/granim/2.0.0/granim.js');
 
         echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -25,38 +18,51 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     
 </head>
 <body>
-    <div class="col-xl-10 mx-auto content">
-        <div class="name-message-container">
-            <div class="name">Phone Book</div>
-            <hr class="horizontal-line">
-            <div class="message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam quod saepe, distinctio at eius fuga maiores laborum consequuntur numquam porro tempore ullam et minus blanditiis repellat placeat molestiae totam adipisci?</div>
-        </div>
-        <div class="form-box">
-            <div class="button-box">
-                <div id="btn"></div>
-                <button type="button" class="toggle-btn toggle-btn-login">Log In</button>
-                <button type="button" class="toggle-btn toggle-btn-register">Register</button>
+    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 mx-auto container">
+        <div class="content">
+            <div class="name-message-container">
+                <div class="name">Phone Book</div>
+                <hr class="horizontal-line">
+                <div class="message">
+                    Your success is in our hands!<br/><br/>
+
+                    Create proffesional data base of buisness data for your company development.<br/><br/>
+
+                    Here you can put every information, to contact your buisness partners, and clear interface will grant you quick access to all of your records.
+                </div>
             </div>
-            <?php
+            <div class="form-box">
+                <div class="button-box">
+                    <div id="btn"></div>
+                    <button type="button" class="toggle-btn toggle-btn-login">Log In</button>
+                    <button type="button" class="toggle-btn toggle-btn-register">Register</button>
+                </div>
+                <div class="forms">
+                    <?php
 
-                // LOG IN FORM
-                echo $this->Form->create('Login', array('type' => 'post', 'url' => '/login-user', 'class' => 'login-form inputs-group'));
-                echo $this->Form->input('login',array('placeholder' => 'Login', 'label' => '', 'class' => 'input-field'));
-                echo $this->Form->input('password',array('placeholder' => 'Password', 'label' => '', 'class' => 'input-field'));
-                echo $this->Form->input('rememberMe',array('label' => '<span>Remember Me</span>', 'type' => 'checkbox', 'class' => 'check-box'));
-                echo $this->Form->end('Log In');
+                        // LOG IN FORM
+                        echo $this->Form->create('Login', array('type' => 'post', 'url' => '/login-user', 'class' => 'login-form inputs-group'));
+                        echo $this->Form->input('login',array('placeholder' => 'Login', 'label' => '', 'class' => 'input-field'));
+                        echo $this->Form->input('password',array('placeholder' => 'Password', 'label' => '', 'class' => 'input-field'));
+                        echo $this->Form->input('rememberMe',array('label' => '<span>Remember Me</span>', 'type' => 'checkbox', 'class' => 'check-box'));
+                        echo "<span class='error'>".$this->Session->read("loginError")."</span>";
+                        $options = array('label' => 'Log In', 'class' => 'submitBtn', 'div' => false);
+                        echo $this->Form->end($options);
 
-                // REGISTRATION FORM
-                echo $this->Form->create('Register', array('type' => 'post', 'url' => '/register-user', 'class' => 'register-form inputs-group'));
-                echo $this->Form->input('login',array('placeholder' => 'Login', 'label' => '', 'class' => 'input-field'));
-                echo $this->Form->input('password',array('placeholder' => 'Password', 'label' => '', 'class' => 'input-field'));
-                echo $this->Form->input('password',array('placeholder' => 'Confirm Password', 'label' => '', 'class' => 'input-field'));
-                echo $this->Form->input('agreeToRules',array('label' => '<span>I agree to Terms & Conditions</span>', 'type' => 'checkbox', 'class' => 'check-box'));
-                echo $this->Form->end('Register');
+                        // REGISTRATION FORM
+                        echo $this->Form->create('Register', array('type' => 'post', 'url' => '/register-user', 'class' => 'register-form inputs-group'));
+                        echo $this->Form->input('login',array('placeholder' => 'Login', 'label' => '', 'class' => 'input-field'));
+                        echo $this->Form->input('password',array('placeholder' => 'Password', 'label' => '', 'class' => 'input-field'));
+                        echo $this->Form->input('passwordConfirm',array('placeholder' => 'Confirm Password', 'label' => '', 'class' => 'input-field'));
+                        echo $this->Form->input('agreeToRules',array('label' => '<span>I agree to Terms & Conditions</span>', 'type' => 'checkbox', 'class' => 'check-box'));
+                        echo $this->Form->end('Register');
 
-            ?>
+                    ?>
+                </div>
+                
+            </div>
         </div>
     </div>
-    
+
 </body>
 </html>

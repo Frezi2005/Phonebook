@@ -1,11 +1,10 @@
 {
     "name": "Phonebook",
     "require": {
-        "cakephp/cakephp": "2.10.*"
+        "cakephp/cakephp": "2.10.*",
+        "twbs/bootstrap": "^4.4"
     },
     "config": {
         "vendor-dir": "Vendor/"
     }
 }
-
-

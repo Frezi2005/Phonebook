@@ -12,6 +12,7 @@ body {
 	font-family: 'Montserrat', sans-serif;
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
 }
 
 body {
@@ -23,6 +24,7 @@ body {
 
 .name {
 	width: 100%;
+	margin-top: 150px;
 	font-weight: bold;
 	color: #b3293c;
 	/* -webkit-text-stroke-width: 1px;
@@ -34,14 +36,15 @@ body {
 .message {
 	color: #492540;
 	font-weight: 800;
-	padding: 20px;
 	width: 100%;
+    padding: 15px;
+	margin-top: -20px;
+	text-align: center;
 }
 
 .name-message-container {
 	background: rgba(255, 255, 255, .85);
 	width: 600px;
-	margin-top: 250px;
 }
 
 
@@ -49,6 +52,12 @@ body {
     border: 1px solid #b3293c;
     width: 200px;
     margin-top: 0;
+}
+
+.content {
+	height: 300px;
+	margin-bottom: 50px;
+	margin-top: 200px;
 }
 
 /*FORM STYLES*/
@@ -142,21 +151,6 @@ input[type=submit] {
 	transition: .5s;
 }
 
-#link {
-    color: #492540;
-    text-decoration: none;
-}
-
-#link:hover {
-    color: #492540;
-    text-decoration: none;
-}
-
-#link:visited {
-    color: #492540;
-    text-decoration: none;
-}
-
 footer {
 	background-color: rgba(246, 234, 140, 0.7);
 	color: black;
@@ -173,3 +167,46 @@ footer {
 	text-align: center;
 	font-weight: bold;
 }
+
+@media (max-width: 1000px) {
+
+	body, html {
+		overflow: scroll;
+		-ms-overflow-style: none; 
+    	scrollbar-width: none; 
+	}
+
+	body::-webkit-scrollbar, html::-webkit-scrollbar {
+		display: none;
+	}
+
+	.name-message-container {
+		margin: auto;
+		width: 350px;
+	}
+
+	#footer-text {
+		font-size: 13px;
+	}
+
+	ul {
+		display: none;
+	}
+
+	i.hamburger-menu {
+		display: block !important;
+		right: 10px;
+	}
+	
+	.menu {
+		display: block;
+	}
+}
+
+@media (min-width: 1001px) {
+
+	body, html {
+		overflow: hidden;
+	}
+}
+

@@ -28,8 +28,9 @@
 	Router::connect('/home', array('controller' => 'main', 'action' => 'home'));	
 	Router::connect('/about', array('controller' => 'main', 'action' => 'about'));
 	Router::connect('/contact', array('controller' => 'main', 'action' => 'contact'));
+	Router::connect('/tests', array('controller' => 'main', 'action' => 'tests'));
 
-	Router::connect('/contacts', array('controller' => 'main', 'action' => 'contacts'));
+	Router::connect('/profile', array('controller' => 'main', 'action' => 'profile'));
 	Router::connect('/login-form', array('controller' => 'user', 'action' => 'loginForm'));
 	Router::connect('/register-form', array('controller' => 'user', 'action' => 'registerForm'));
 	Router::connect('/login-user', array('controller' => 'user', 'action' => 'loginUser'));
@@ -37,8 +38,10 @@
 	Router::connect('/delete-user', array('controller' => 'user', 'action' => 'deleteUser'));
 	Router::connect('/register-user', array('controller' => 'user', 'action' => 'registerUser'));
 	Router::connect('/add-contact', array('controller' => 'contact', 'action' => 'addContact'));
-	Router::connect('/remove-contact', array('controller' => 'contact', 'action' => 'removeContact'));
+	Router::connect('/remove-contact/:id', array('controller' => 'contact', 'action' => 'removeContact'));
 	Router::connect('/edit-contact', array('controller' => 'contact', 'action' => 'editContact'));
+	Router::connect('/change-login', array('controller' => 'user', 'action' => 'changeLogin'));
+
 
 
 /**

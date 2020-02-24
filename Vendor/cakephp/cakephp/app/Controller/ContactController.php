@@ -37,6 +37,16 @@ class ContactController extends AppController {
  */
 	public $uses = array();
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		App::uses('CakeTime', 'Utility');
+		$this->loadModel('Contact');
+		if(empty($this->Session->Check('LoggedIn')))
+			$this->layout = 'default';		
+		else 
+			$this->layout = 'loggedIn';
+	}
+
 /**
  * Displays a view
  *
@@ -79,15 +89,39 @@ class ContactController extends AppController {
 	}
 
 	public function addContact() {
-		echo "I'm in addContact()";
+		$contact = $this->request->data['AddContact'];
+		
+		$this->Contact->save(array('id' => null, 'name' => $contact['name'], 'number' => $contact['number'], 'secondNumber' => $contact['secondNumber'], 'profilePicture' => '','userId' => $this->Session->read('uuid'), 'created' => '', 'modified' => '', 'isFavourite' => 0, 'address' => $contact['address'], 'company' => $contact['company']));
+		$this->redirect("/profile");
 	}
 
 	public function removeContact() {
-		echo "I'm in removeContact()";
+		$this->Contact->deleteAll(array('Contact.id' => $this->params['id']), false);
+		$this->redirect("/profile");
 	}
 
 	public function editContact() {
-		echo "I'm in editContact()";
+		
+		$editContact = $this->request->data['EditContact'];
+		$this->Contact->read(null, $editContact['contactId']);
+		
+		foreach($editContact as $key => $field) {
+			
+			if (strlen($field) == 0) {
+				continue;
+			} else {
+				$this->Contact->set(array($key => $field));
+			}
+		}
+
+		$this->Contact->set(array('modified' => date('Y-m-d H:i:s')));
+
+		$this->Contact->save();
+
+		$this->Flash->set("Your contact was edited.");
+
+		$this->redirect("/profile");
+
 	}
 
 }

@@ -37,6 +37,15 @@ class MainController extends AppController {
  */
 	public $uses = array();
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		if(empty($this->Session->Check('LoggedIn'))) {
+			$this->layout = 'default';
+		}			
+		else 
+			$this->layout = 'loggedIn';
+	}
+
 /**
  * Displays a view
  *
@@ -79,24 +88,31 @@ class MainController extends AppController {
 	}
 
 	public function home() {
-			
-		$this->layout = 'default';
-
+		
 	}
 
 	public function about() {
 			
-		$this->layout = 'default';
-
 	}
 
 	public function contact() {
-			
-		$this->layout = 'default';
 
 	}
 
-	public function contacts() {
-		echo "I'm in contacts";
+	public function profile() {
+		$this->loadModel('Contact');
+		$this->loadModel('User');
+
+		$query = $this->Contact->find('all', array('conditions' => array('userId' => $_SESSION['uuid'])));
+		$userName = $this->User->find('first', array('conditions' => array('uuid' => $_SESSION['uuid'])));
+
+		$this->set('contacts', $query);
+		$this->set('name', $userName['User']['username']);
+		$this->set('totalContacts', count($query));
+
+	}
+
+	public function tests() {
+
 	}
 }
