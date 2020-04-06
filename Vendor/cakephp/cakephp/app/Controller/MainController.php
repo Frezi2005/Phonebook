@@ -46,6 +46,15 @@ class MainController extends AppController {
 			$this->layout = 'loggedIn';
 	}
 
+	public $components = array('Paginator');
+
+    public $paginate = array(
+        'limit' => 9,
+        'order' => array(
+            'Contact.id' => 'asc'
+        )
+    );
+
 /**
  * Displays a view
  *
@@ -88,7 +97,7 @@ class MainController extends AppController {
 	}
 
 	public function home() {
-		
+
 	}
 
 	public function about() {
@@ -100,15 +109,24 @@ class MainController extends AppController {
 	}
 
 	public function profile() {
+
+		$this->Paginator->settings = $this->paginate;
+
+		if(!$this->Session->read("LoggedIn")) {
+			$this->redirect("/home");
+		}
+
 		$this->loadModel('Contact');
 		$this->loadModel('User');
 
-		$query = $this->Contact->find('all', array('conditions' => array('userId' => $_SESSION['uuid'])));
-		$userName = $this->User->find('first', array('conditions' => array('uuid' => $_SESSION['uuid'])));
+		$data = $this->Paginator->paginate('Contact', array("userId LIKE '".$_SESSION['uuid']."'"));
 
-		$this->set('contacts', $query);
+		$userName = $this->User->find('first', array('conditions' => array('uuid' => $_SESSION['uuid'])));
+		$contactsCount = $this->Contact->find('all', array('conditions' => array('userId' => $_SESSION['uuid'])));
+
+		$this->set('contacts', $data);
 		$this->set('name', $userName['User']['username']);
-		$this->set('totalContacts', count($query));
+		$this->set('totalContacts', count($contactsCount));
 
 	}
 

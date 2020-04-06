@@ -1,8 +1,4 @@
 
-<?php
-$this->loadHelper('Html');
-$cakeDescription = 'CakePHP: the rapid development php framework';
-?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,7 +8,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
         echo $this->fetch('meta');
 		echo $this->fetch('css');
-		echo $this->fetch('script');
+        echo $this->fetch('script');
 
     ?>
     
@@ -63,6 +59,30 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </div>
         </div>
     </div>
+
+    <?php
+
+    if($this->Session->read("registerMessage") !== null) {?>
+        <script>
+
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        timer: 3000,
+        showConfirmButton: false,
+        });
+
+        Toast.fire({
+        icon: 'success',
+        title: "<?=$this->Session->read("registerMessage")?>"
+        });
+        </script>
+    <?php 
+        unset($_SESSION['registerMessage']);
+    } 
+    ?>
+
+    
 
 </body>
 </html>

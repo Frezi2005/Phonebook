@@ -1,42 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php
-    echo $this->Html->css('tests');
+<h1>Hello World!</h1>
 
-    echo $this->fetch('meta');
-    echo $this->fetch('css');
-    echo $this->fetch('script');
-    ?>
-</head>
-<body>
+<?php
+
+for($i = 1; $i <= 100; $i++) {
+    $str = "";
+    if($i % 3 == 0) {
+        $str .= "Fizz";
+    } 
+    if($i % 5 == 0) {
+        $str .= "Buzz";
+    } 
     
-    <div class="container">
-        <div class="main">
-            <div class="first"></div>
-            <div class="second"></div>
-        </div> 
+    echo $i." -> ".$str."<br/>";
+}
 
-    </div>
-
-    <script>
-        
-        var main = $(".main");
-        var clicked = true;
-
-        $(document).click(() => {
-            if(clicked == true) {
-                main.css("left", "-400px");
-                clicked = false;
-                console.log(clicked);
-            } else {
-                main.css("left", "0");
-                clicked = true;
-                console.log(clicked);
-            }
-        });
-
-    </script>
-
-</body>
-</html>
+?>

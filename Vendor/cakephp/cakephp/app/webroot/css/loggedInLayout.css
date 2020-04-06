@@ -48,6 +48,61 @@ nav ul li a:hover {
 	text-decoration: none;
 }
 
+.hamburger-menu {
+	color: white;
+	font-size: 40px;
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	display: none !important;
+	cursor: pointer;
+}
+
+.close-menu {
+	color: white;
+	font-size: 40px;
+	margin: 0;
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	cursor: pointer;
+}
+
+.menu {
+	height: 100%;
+	width: 50%;
+	background-color: #353535;
+	color: white;
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	text-align: center;
+	left: 100%;
+	transition: all .5s;
+	font-size: 20px;
+}
+
+.menu a {
+	display: block;
+	height: 60px;
+	line-height:  60px;
+	text-decoration: none;
+	transition: all .5s;
+	color: white;
+	cursor: pointer;
+}
+
+.menu a:visited {
+	color: white;
+}
+
+.menu a:hover {
+	color: rgb(131, 131, 131);
+	text-decoration: none;
+}
+
 nav ul {
 	float: right;
 }
@@ -184,4 +239,19 @@ footer {
 	line-height: 40px;
 	text-align: center;
 	font-weight: bold;
+}
+
+@media (max-width: 1000px) {
+	i.hamburger-menu {
+		display: block !important;
+		right: 30px;
+	}
+	
+	.menu {
+		display: block;
+	}
+
+	ul {
+		display: none;
+	}
 }

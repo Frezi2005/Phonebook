@@ -100,6 +100,25 @@ class ContactController extends AppController {
 		$this->redirect("/profile");
 	}
 
+	public function favouriteContact() {
+		$isFavourite = $this->params['id'];
+		$contact = $this->Contact->read(null, $this->params['id']);
+		
+		foreach($isFavourite as $key => $field) {
+			
+			if (strlen($field) == 0) {
+				continue;
+			} else {
+				$this->Contact->set(array($key => $field));
+			}
+		}
+
+		$this->Contact->set(array('modified' => date('Y-m-d H:i:s'), 'isFavourite' => $contact['Contact']['isFavourite'] ? false : true));
+		$this->Contact->save();
+
+		$this->redirect("/profile");
+	}
+
 	public function editContact() {
 		
 		$editContact = $this->request->data['EditContact'];
@@ -122,6 +141,58 @@ class ContactController extends AppController {
 
 		$this->redirect("/profile");
 
+	}
+
+	public function sortAplhabeticAsc() {
+		$this->autoRender = false;
+		$contact = $this->Contact->find('all', array(
+			'order'=>array('`name`')
+		));
+		return json_encode($contact);
+	}
+
+	public function sortAplhabeticDesc() {
+		$this->autoRender = false;
+		$contact = $this->Contact->find('all', array(
+			'order'=>array('`name` DESC')
+		));
+		return json_encode($contact);
+	}
+
+	public function sortDateAsc() {
+		$this->autoRender = false;
+		$contact = $this->Contact->find('all', array(
+			'order'=>array('`created`')
+		));
+		return json_encode($contact);
+	}
+
+	public function sortDateDesc() {
+		$this->autoRender = false;
+		$contact = $this->Contact->find('all', array(
+			'order'=>array('`created` DESC')
+		));
+		return json_encode($contact);
+	}
+
+	public function sortFav() {
+		$this->autoRender = false;
+		$contact = $this->Contact->find('all', array(
+			'order'=>array('`isFavourite` DESC')
+		));
+		return json_encode($contact);
+	}
+
+	public function searchContacts() {
+		$query = $this->params['query'];
+		$this->autoRender = false;
+		if(!empty(trim($query))) {
+			$contacts = $this->Contact->find('all', array(
+				'conditions'=>array('`name` LIKE' => $query."%")
+			));
+			return json_encode($contacts);
+		}
+		
 	}
 
 }

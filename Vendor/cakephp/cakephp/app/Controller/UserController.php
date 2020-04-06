@@ -101,8 +101,8 @@ class UserController extends AppController {
 
 		$userCredentials = $this->request->data['Login'];
 
-		if(!empty($this->User->find('first', array('conditions' => array('password' => $this->request->data['Login']['password'], 'username' => $this->request->data['Login']['login']))))) {
-			$user = $this->User->find('first', array('conditions' => array('password' => $this->request->data['Login']['password'], 'username' => $this->request->data['Login']['login'])));
+		if(!empty($this->User->find('first', array('conditions' => array('password' => hash("SHA384", md5($this->request->data['Login']['password'])), 'username' => $this->request->data['Login']['login']))))) {
+			$user = $this->User->find('first', array('conditions' => array('password' => hash("SHA384", md5($this->request->data['Login']['password'])), 'username' => $this->request->data['Login']['login'])));
 			$this->Session->write("LoggedIn", true);
 			$this->Session->write("uuid", $user['User']['uuid']);
 			$this->redirect("/profile");
@@ -115,17 +115,24 @@ class UserController extends AppController {
 	public function registerUser() {
 
 		$user = $this->request->data['Register'];
+		$this->User->set($this->request->data['Register']);
 
-		$this->User->save(array('id' => null, 'username' => $user['login'], 'password' => $user['password'], 'uuid' => CakeText::uuid()));
+		
+		if($this->User->validates()) {
+			if($this->User->save(array('id' => null, 'username' => $user['login'], 'password' => hash("SHA384", md5($user['password'])), 'uuid' => CakeText::uuid()))) {
+				$this->Session->write("registerMessage", "Your account have been created succeselfully. You can login now!");
+				$this->redirect("/home");
+			}
+		} else {
+			debug($this->User->validationErrors);
+		}	
+
 	}
-
+		
 	public function logoutUser() {
 		$this->Session->delete("LoggedIn");
 
-		$this->Flash->set("You are logged out.");
-
 		$this->redirect("/home");
-
 	}
 
 	public function deleteUser() {

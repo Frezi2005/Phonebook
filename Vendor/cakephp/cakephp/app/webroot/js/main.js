@@ -74,6 +74,17 @@ $(() => {
 		window.location = "remove-contact/" + $(this).attr('id');
 	});
 
+	//MAKING CONTACT FAVOURITE
+
+	const favBtn = $('*[data-function="favourite-contact"]');
+
+	favBtn.click(function (event) {
+		event.stopPropagation();
+		event.stopImmediatePropagation();
+		window.location = "favourite-contact/" + $(this).attr('id');
+		$(this).css("color", "yellow");
+	});
+
 	//DISPLAYING MODAL
 
 	const addBtn = $('*[data-function="add-contact"]');
@@ -92,20 +103,43 @@ $(() => {
 
 	//SHOWING CONTACT DETAILS
 
-	const arrow = $(".arrow");
-	let opened = false;
+	let div = $("*[data-function='openContact']");
 
-	arrow.click(function () {
-		if (!opened) {
-			//OPEN
-			$(this).css("rotate", "180deg");
-			$(this).parent().parent().css("height", "360px");
-			opened = true;
-		} else {
-			//CLOSE
-			$(this).css("rotate", "90deg");
-			$(this).parent().parent().css("height", "50px");
-			opened = false;
+	div.click(function () {
+		div.not($(this)).removeClass("open");
+		$(this).toggleClass("open");
+		if(div.hasClass("open"))
+			$(".contacts").addClass("openContactsList");	
+		else	
+			$(".contacts").removeClass("openContactsList");	
+
+	});
+
+	//LIVE CONTACS SEARCH
+
+	let searchInput = $("#query");
+
+	searchInput.keyup(function () {
+		$(".searchedContacts").children().remove();
+		let value = searchInput.val();
+		if(value.trim() !== "") {
+			$.ajax({
+				url: 'http://localhost/Phonebook/Vendor/cakephp/cakephp/search/'+value,
+				type: 'GET',
+				dataType: 'json',
+				error: function (request, status, error) {
+					alert(request.responseText);
+				}
+			}).done(function (data) {
+				console.log(data);
+				for(var i = 0; i < data.length; i++) {
+					$(".searchedContacts").append("<div class='searched'>"+data[i].Contact.name+"</div>");
+				}
+			}).always(function () {
+
+			}).fail(function () {
+				alert("error");
+			});
 		}
 	});
 

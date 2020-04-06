@@ -30,5 +30,21 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class UserModel extends Model {
-    
+    public $validate = array(
+        'login' => array(
+            'alphaNumeric' => array(
+                'rule' => 'alphaNumeric',
+                'required' => true,
+                'message' => 'Letters and numbers only'
+            ),
+            'between' => array(
+                'rule' => array('lengthBetween', 3, 20),
+                'message' => 'Between 3 to 20 characters'
+            )
+        ),
+        'password' => array(
+            'rule' => array('minLength', '8'),
+            'message' => 'Minimum 8 characters long'
+        )
+    );
 }
