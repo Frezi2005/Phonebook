@@ -97,6 +97,11 @@ body {
 	height: 30px;
 	font-size: 20px;
 	color: black;
+	cursor: pointer;
+}
+
+.searched:hover {
+	background-color: yellow;
 }
 
 .horizontal-line {
@@ -112,6 +117,13 @@ body {
 
 .contact {
 	border-bottom: 1px solid black;
+	width: 100%;
+}
+
+label {
+	font-size: 20px;
+	height: 30px;
+	margin-bottom: -40px;
 }
 
 .icons {
@@ -138,7 +150,7 @@ body {
 }
 
 .openContactsList {
-	height: calc(93% + 322.2px);
+	height: calc(93% + 310.2px);
 	margin-bottom: 200px;
 }
 
@@ -177,6 +189,10 @@ body {
 	padding: 0;
 	margin: 0;
 	float: left;
+}
+
+.contact > * {
+	z-index: 100;
 }
 
 .login, .contactsNumber, .change-name, change-password {
@@ -315,14 +331,20 @@ tr {
 
 .input-field {
 	width: 100%;
-	padding: 10px 0;
 	margin: 5px 0;
+	height: 40px;
 	border-top: 0;
 	border-right: 0;
 	border-left: 0;
 	border-bottom: 1px solid rgb(0, 0, 0);
 	outline: none;
 	background: transparent;
+	margin-top: -80px;
+	font-size: 16px;
+}
+
+.input-field::placeholder {
+	margin-bottom: -20px;
 }
 
 .input-field::placeholder {
@@ -338,15 +360,11 @@ tr {
 }
 
 .submit {
-	margin-top: 40px;
+	margin-top: -40px;
 	display: block;
 	margin-right: 10px;
 	text-align: right;
 	float: right !important;
-}
-
-#flashMessage {
-	color: white;
 }
 
 input[type=submit] {
@@ -405,7 +423,7 @@ footer {
 	color: black;
 	font-size: 25px;
 	position: absolute;
-	top: 95%;
+	bottom: -10px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -452,6 +470,30 @@ a.change-name, a.change-password {
 	margin: 10px;
 }
 
+.addContactModal > .submit > input {
+	margin-top: 80px;
+}
+
+#flashMessage {
+	float: right;
+	color: red;
+	background: rgba(255, 255, 255, .85);
+	border-radius: 20px;
+	width: 300px;
+	height: 60px;
+	line-height: 30px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: auto;
+	bottom: 150px;
+}
+
+.searched > a {
+	text-decoration: none;
+	color: black;
+}
+
 @media (max-width: 1000px) {
 	.profile {
 		font-size: 13px;
@@ -466,11 +508,33 @@ a.change-name, a.change-password {
 	}
 
 	.paginationLinks {
-		font-size: 14px;
+		font-size: 17px;
+		bottom: -5px;
+		width: 200px;
 	}
 
 	.sortButton {
 		width: 80px;
+	}
+
+	.submit {
+		margin-top: 30px;
+	}
+
+	.icons {
+		display: none;
+	}
+
+	.createdDate {
+		display: none;
+	}
+
+	.openContactsList {
+		height: calc(93% + 625px) !important;
+	}
+
+	.addContact {
+		font-size: 15px;
 	}
 
 }
@@ -492,6 +556,16 @@ a.change-name, a.change-password {
 	.open {
 		height: 450px;
 	}
+
+	.openContactsList {
+		height: calc(93% + 400px);
+		margin-bottom: 200px;
+	}
+
+	.paginactionLinks {
+		font-size: 25px;
+	}
+	
 }
 
 @media (max-width: 1020px) {

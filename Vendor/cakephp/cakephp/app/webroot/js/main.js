@@ -106,6 +106,12 @@ $(() => {
 	let div = $("*[data-function='openContact']");
 
 	div.click(function () {
+		$(this).children().each(function () {
+			$(this).children().not(".createdDate").click(function (e) {
+				e.stopPropagation();
+			})
+		})
+
 		div.not($(this)).removeClass("open");
 		$(this).toggleClass("open");
 		if(div.hasClass("open"))
@@ -128,19 +134,18 @@ $(() => {
 				type: 'GET',
 				dataType: 'json',
 				error: function (request, status, error) {
-					alert(request.responseText);
+
 				}
 			}).done(function (data) {
-				console.log(data);
 				for(var i = 0; i < data.length; i++) {
-					$(".searchedContacts").append("<div class='searched'>"+data[i].Contact.name+"</div>");
+					$(".searchedContacts").append("<div class='searched'><a href='skype:"+data[i].Contact.number+"?call'>"+data[i].Contact.name+"</a></div>");
 				}
 			}).always(function () {
 
 			}).fail(function () {
-				alert("error");
+
 			});
 		}
-	});
+	});	
 
 });

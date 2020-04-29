@@ -133,4 +133,12 @@ class MainController extends AppController {
 	public function tests() {
 
 	}
+
+	public function privacyPolicy() {
+
+	}
+
+	public function personalData() {
+
+	}
 }

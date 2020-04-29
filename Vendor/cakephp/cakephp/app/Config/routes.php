@@ -29,6 +29,9 @@
 	Router::connect('/about', array('controller' => 'main', 'action' => 'about'));
 	Router::connect('/contact', array('controller' => 'main', 'action' => 'contact'));
 	Router::connect('/tests', array('controller' => 'main', 'action' => 'tests'));
+	Router::connect('/privacyPolicy', array('controller' => 'main', 'action' => 'privacyPolicy'));
+	Router::connect('/personalData', array('controller' => 'main', 'action' => 'personalData'));
+
 
 	Router::connect('/profile', array('controller' => 'main', 'action' => 'profile'));
 	Router::connect('/login-form', array('controller' => 'user', 'action' => 'loginForm'));
@@ -41,7 +44,7 @@
 	Router::connect('/remove-contact/:id', array('controller' => 'contact', 'action' => 'removeContact'));
 	Router::connect('/favourite-contact/:id', array('controller' => 'contact', 'action' => 'favouriteContact'));
 	Router::connect('/edit-contact', array('controller' => 'contact', 'action' => 'editContact'));
-	Router::connect('/change-login', array('controller' => 'user', 'action' => 'changeLogin'));
+	Router::connect('/change-password', array('controller' => 'user', 'action' => 'changePassword'));
 	Router::connect('/sortAplhaAsc', array('controller' => 'contact', 'action' => 'sortAplhabeticAsc'));
 	Router::connect('/sortAplhaDesc', array('controller' => 'contact', 'action' => 'sortAplhabeticDesc'));
 	Router::connect('/sortDateAsc', array('controller' => 'contact', 'action' => 'sortDateAsc'));

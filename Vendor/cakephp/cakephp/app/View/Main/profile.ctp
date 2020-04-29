@@ -18,8 +18,7 @@
 		<div class="login"><?=$name?></div>
 		<div class="contactsNumber">Number of contact: <?=$totalContacts?></div>
 		<div class="settings">
-			<a href="change-login" class="change-name">Change login</a><br />
-			<a href="" class="change-password">Change password</a>
+			<a href="change-password" class="change-name">Change password</a><br />
 		</div>
 	</div>
 
@@ -38,18 +37,17 @@
 
             for($i = 0; $i < count($contacts); $i++) { 
                 ?>
-		<div class='row text-right test' data-function='openContact'>
-			<div class='col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 text-left contact' data-function='created-date'
-				data-timestamp='<?=strtotime($contacts[$i]['Contact']['created'])?>'>
+		<div class='row text-right' data-function='openContact'>
+			<div class='col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 text-left contact' data-function='created-date' data-timestamp='<?=strtotime($contacts[$i]['Contact']['created'])?>'>
 				<i class='fas fa-sort-up arrow my-auto' id='arrow<?=$i?>'></i>
 				<?php
                         echo "<span class='contactName'>".$contacts[$i]['Contact']['name']."</span> <span class='number'>- <a href='skype:".$contacts[$i]['Contact']['number']."?call'>".$contacts[$i]['Contact']['number']."</a></span><span class='createdDate' id='contact$i'>".strtotime($contacts[$i]['Contact']['created'])."</span>";
                         echo $this->Form->create('EditContact', array('url' => '/edit-contact', 'type' => 'post', 'class' => 'editContactForm'));
-                        echo $this->Form->input("name", array('placeholder' => 'Edit Name And Surname', 'class' => 'nameInput input-field', 'label' => ''));
-                        echo $this->Form->input("number", array('placeholder' => 'Edit Phone Number', 'class' => 'phoneNumber input-field', 'label' => ''));
-                        echo $this->Form->input("secondNumber", array('placeholder' => 'Edit Second Phone Number', 'class' => 'secondPhoneNumber input-field', 'label' => ''));
-                        echo $this->Form->input("address", array('placeholder' => 'Edit Address', 'class' => 'addressInput input-field', 'label' => ''));
-                        echo $this->Form->input("company", array('placeholder' => 'Edit Company', 'class' => 'companyInput input-field', 'label' => ''));
+                        echo $this->Form->input("name", array('placeholder' => 'Edit Name And Surname', 'class' => 'nameInput input-field', 'label' => 'Name', 'value' => $contacts[$i]['Contact']['name']));
+                        echo $this->Form->input("number", array('placeholder' => 'Edit Phone Number', 'class' => 'phoneNumber input-field', 'label' => 'Number', 'value' => $contacts[$i]['Contact']['number']));
+                        echo $this->Form->input("secondNumber", array('placeholder' => 'Edit Second Phone Number', 'class' => 'secondPhoneNumber input-field', 'label' => 'Second Number', 'value' => $contacts[$i]['Contact']['secondNumber']));
+                        echo $this->Form->input("address", array('placeholder' => 'Edit Address', 'class' => 'addressInput input-field', 'label' => 'Address', 'value' => $contacts[$i]['Contact']['address']));
+                        echo $this->Form->input("company", array('placeholder' => 'Edit Company', 'class' => 'companyInput input-field', 'label' => 'Company', 'value' => $contacts[$i]['Contact']['company']));
                         echo $this->Form->input('contactId', array('value' => $contacts[$i]['Contact']['id'], 'type' => 'hidden'));
                         echo $this->Form->end("Save", array('div' => false, 'class' => 'submitBtn'));?>
 
@@ -126,16 +124,16 @@
 				
 				$(".contacts").append(
 					"<div class='row text-right' data-function='openContact'>\
-						<div class='col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 text-left contact' data-function='created-date' data-timestamp='"+timestamp+"'>\
+						<div class='col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 text-left contact' data-function='created-date' data-timestamp='"+timestamp+"'>\
 							<i class='fas fa-sort-up arrow my-auto' id='arrow"+data[i].Contact.id+"'></i>\
 							<span class='contactName'>"+data[i].Contact.name+"</span> <span class='number'>- "+data[i].Contact.number+"</span><span class='createdDate' id='contact"+data[i].Contact.id+"'>"+timestamp+"</span>\
 							<form action='/Phonebook/Vendor/cakephp/cakephp/edit-contact' class='editContactForm' id='EditContactProfileForm' method='post' accept-charset='utf-8'>\
 								<div style='display:none;'><input type='hidden' name='_method' value='POST'/></div>\
-								<div class='input text'><label for='EditContactName'></label><input name='data[EditContact][name]' placeholder='Edit Name And Surname' class='nameInput input-field' type='text' id='EditContactName'/></div>\
-								<div class='input text'><label for='EditContactNumber'></label><input name='data[EditContact][number]' placeholder='Edit Phone Number' class='phoneNumber input-field' type='text' id='EditContactNumber'/></div>\
-								<div class='input text'><label for='EditContactSecondNumber'></label><input name='data[EditContact][secondNumber]' placeholder='Edit Second Phone Number' class='secondPhoneNumber input-field' type='text' id='EditContactSecondNumber'/></div>\
-								<div class='input text'><label for='EditContactAddress'></label><input name='data[EditContact][address]' placeholder='Edit Address' class='addressInput input-field' type='text' id='EditContactAddress'/></div>\
-								<div class='input text'><label for='EditContactCompany'></label><input name='data[EditContact][company]' placeholder='Edit Company' class='companyInput input-field' type='text' id='EditContactCompany'/></div>\
+								<div class='input text'><label for='EditContactName'>Name</label><input name='data[EditContact][name]' placeholder='Edit Name And Surname' class='nameInput input-field' type='text' id='EditContactName' value='"+data[i].Contact.name+"'/></div>\
+								<div class='input text'><label for='EditContactNumber'>Number</label><input name='data[EditContact][number]' placeholder='Edit Phone Number' class='phoneNumber input-field' type='text' id='EditContactNumber' value='"+data[i].Contact.number+"'/></div>\
+								<div class='input text'><label for='EditContactSecondNumber'>Second Number</label><input name='data[EditContact][secondNumber]' placeholder='Edit Second Phone Number' class='secondPhoneNumber input-field' type='text' id='EditContactSecondNumber' value='"+data[i].Contact.secondNumber+"'/></div>\
+								<div class='input text'><label for='EditContactAddress'>Address</label><input name='data[EditContact][address]' placeholder='Edit Address' class='addressInput input-field' type='text' id='EditContactAddress' value='"+data[i].Contact.address+"'/></div>\
+								<div class='input text'><label for='EditContactCompany'>Company</label><input name='data[EditContact][company]' placeholder='Edit Company' class='companyInput input-field' type='text' id='EditContactCompany' value='"+data[i].Contact.company+"'/></div>\
 								<input type='hidden' name='data[EditContact][contactId]' value='"+data[i].Contact.id+"' id='EditContactContactId'/>\
 								<div class='submit'><input type='submit' value='Save'/></div>\
 							</form>\
@@ -199,16 +197,16 @@
 				
 				$(".contacts").append(
 					"<div class='row text-right' data-function='openContact'>\
-						<div class='col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 text-left contact' data-function='created-date' data-timestamp='"+timestamp+"'>\
+						<div class='col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 text-left contact' data-function='created-date' data-timestamp='"+timestamp+"'>\
 							<i class='fas fa-sort-up arrow my-auto' id='arrow"+data[i].Contact.id+"'></i>\
 							<span class='contactName'>"+data[i].Contact.name+"</span> <span class='number'>- "+data[i].Contact.number+"</span><span class='createdDate' id='contact"+data[i].Contact.id+"'>"+timestamp+"</span>\
 							<form action='/Phonebook/Vendor/cakephp/cakephp/edit-contact' class='editContactForm' id='EditContactProfileForm' method='post' accept-charset='utf-8'>\
 								<div style='display:none;'><input type='hidden' name='_method' value='POST'/></div>\
-								<div class='input text'><label for='EditContactName'></label><input name='data[EditContact][name]' placeholder='Edit Name And Surname' class='nameInput input-field' type='text' id='EditContactName'/></div>\
-								<div class='input text'><label for='EditContactNumber'></label><input name='data[EditContact][number]' placeholder='Edit Phone Number' class='phoneNumber input-field' type='text' id='EditContactNumber'/></div>\
-								<div class='input text'><label for='EditContactSecondNumber'></label><input name='data[EditContact][secondNumber]' placeholder='Edit Second Phone Number' class='secondPhoneNumber input-field' type='text' id='EditContactSecondNumber'/></div>\
-								<div class='input text'><label for='EditContactAddress'></label><input name='data[EditContact][address]' placeholder='Edit Address' class='addressInput input-field' type='text' id='EditContactAddress'/></div>\
-								<div class='input text'><label for='EditContactCompany'></label><input name='data[EditContact][company]' placeholder='Edit Company' class='companyInput input-field' type='text' id='EditContactCompany'/></div>\
+								<div class='input text'><label for='EditContactName'>Name</label><input name='data[EditContact][name]' placeholder='Edit Name And Surname' class='nameInput input-field' type='text' id='EditContactName' value='"+data[i].Contact.name+"'/></div>\
+								<div class='input text'><label for='EditContactNumber'>Number</label><input name='data[EditContact][number]' placeholder='Edit Phone Number' class='phoneNumber input-field' type='text' id='EditContactNumber' value='"+data[i].Contact.number+"'/></div>\
+								<div class='input text'><label for='EditContactSecondNumber'>Second Number</label><input name='data[EditContact][secondNumber]' placeholder='Edit Second Phone Number' class='secondPhoneNumber input-field' type='text' id='EditContactSecondNumber' value='"+data[i].Contact.secondNumber+"'/></div>\
+								<div class='input text'><label for='EditContactAddress'>Address</label><input name='data[EditContact][address]' placeholder='Edit Address' class='addressInput input-field' type='text' id='EditContactAddress' value='"+data[i].Contact.address+"'/></div>\
+								<div class='input text'><label for='EditContactCompany'>Company</label><input name='data[EditContact][company]' placeholder='Edit Company' class='companyInput input-field' type='text' id='EditContactCompany' value='"+data[i].Contact.company+"'/></div>\
 								<input type='hidden' name='data[EditContact][contactId]' value='"+data[i].Contact.id+"' id='EditContactContactId'/>\
 								<div class='submit'><input type='submit' value='Save'/></div>\
 							</form>\
@@ -271,16 +269,16 @@
 				
 				$(".contacts").append(
 					"<div class='row text-right' data-function='openContact'>\
-						<div class='col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 text-left contact' data-function='created-date' data-timestamp='"+timestamp+"'>\
+						<div class='col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 text-left contact' data-function='created-date' data-timestamp='"+timestamp+"'>\
 							<i class='fas fa-sort-up arrow my-auto' id='arrow"+data[i].Contact.id+"'></i>\
 							<span class='contactName'>"+data[i].Contact.name+"</span> <span class='number'>- "+data[i].Contact.number+"</span><span class='createdDate' id='contact"+data[i].Contact.id+"'>"+timestamp+"</span>\
 							<form action='/Phonebook/Vendor/cakephp/cakephp/edit-contact' class='editContactForm' id='EditContactProfileForm' method='post' accept-charset='utf-8'>\
 								<div style='display:none;'><input type='hidden' name='_method' value='POST'/></div>\
-								<div class='input text'><label for='EditContactName'></label><input name='data[EditContact][name]' placeholder='Edit Name And Surname' class='nameInput input-field' type='text' id='EditContactName'/></div>\
-								<div class='input text'><label for='EditContactNumber'></label><input name='data[EditContact][number]' placeholder='Edit Phone Number' class='phoneNumber input-field' type='text' id='EditContactNumber'/></div>\
-								<div class='input text'><label for='EditContactSecondNumber'></label><input name='data[EditContact][secondNumber]' placeholder='Edit Second Phone Number' class='secondPhoneNumber input-field' type='text' id='EditContactSecondNumber'/></div>\
-								<div class='input text'><label for='EditContactAddress'></label><input name='data[EditContact][address]' placeholder='Edit Address' class='addressInput input-field' type='text' id='EditContactAddress'/></div>\
-								<div class='input text'><label for='EditContactCompany'></label><input name='data[EditContact][company]' placeholder='Edit Company' class='companyInput input-field' type='text' id='EditContactCompany'/></div>\
+								<div class='input text'><label for='EditContactName'>Name</label><input name='data[EditContact][name]' placeholder='Edit Name And Surname' class='nameInput input-field' type='text' id='EditContactName' value='"+data[i].Contact.name+"'/></div>\
+								<div class='input text'><label for='EditContactNumber'>Number</label><input name='data[EditContact][number]' placeholder='Edit Phone Number' class='phoneNumber input-field' type='text' id='EditContactNumber' value='"+data[i].Contact.number+"'/></div>\
+								<div class='input text'><label for='EditContactSecondNumber'>Second Number</label><input name='data[EditContact][secondNumber]' placeholder='Edit Second Phone Number' class='secondPhoneNumber input-field' type='text' id='EditContactSecondNumber' value='"+data[i].Contact.secondNumber+"'/></div>\
+								<div class='input text'><label for='EditContactAddress'>Address</label><input name='data[EditContact][address]' placeholder='Edit Address' class='addressInput input-field' type='text' id='EditContactAddress' value='"+data[i].Contact.address+"'/></div>\
+								<div class='input text'><label for='EditContactCompany'>Company</label><input name='data[EditContact][company]' placeholder='Edit Company' class='companyInput input-field' type='text' id='EditContactCompany' value='"+data[i].Contact.company+"'/></div>\
 								<input type='hidden' name='data[EditContact][contactId]' value='"+data[i].Contact.id+"' id='EditContactContactId'/>\
 								<div class='submit'><input type='submit' value='Save'/></div>\
 							</form>\
@@ -343,16 +341,16 @@
 				
 				$(".contacts").append(
 					"<div class='row text-right' data-function='openContact'>\
-						<div class='col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 text-left contact' data-function='created-date' data-timestamp='"+timestamp+"'>\
+						<div class='col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 text-left contact' data-function='created-date' data-timestamp='"+timestamp+"'>\
 							<i class='fas fa-sort-up arrow my-auto' id='arrow"+data[i].Contact.id+"'></i>\
 							<span class='contactName'>"+data[i].Contact.name+"</span> <span class='number'>- "+data[i].Contact.number+"</span><span class='createdDate' id='contact"+data[i].Contact.id+"'>"+timestamp+"</span>\
 							<form action='/Phonebook/Vendor/cakephp/cakephp/edit-contact' class='editContactForm' id='EditContactProfileForm' method='post' accept-charset='utf-8'>\
 								<div style='display:none;'><input type='hidden' name='_method' value='POST'/></div>\
-								<div class='input text'><label for='EditContactName'></label><input name='data[EditContact][name]' placeholder='Edit Name And Surname' class='nameInput input-field' type='text' id='EditContactName'/></div>\
-								<div class='input text'><label for='EditContactNumber'></label><input name='data[EditContact][number]' placeholder='Edit Phone Number' class='phoneNumber input-field' type='text' id='EditContactNumber'/></div>\
-								<div class='input text'><label for='EditContactSecondNumber'></label><input name='data[EditContact][secondNumber]' placeholder='Edit Second Phone Number' class='secondPhoneNumber input-field' type='text' id='EditContactSecondNumber'/></div>\
-								<div class='input text'><label for='EditContactAddress'></label><input name='data[EditContact][address]' placeholder='Edit Address' class='addressInput input-field' type='text' id='EditContactAddress'/></div>\
-								<div class='input text'><label for='EditContactCompany'></label><input name='data[EditContact][company]' placeholder='Edit Company' class='companyInput input-field' type='text' id='EditContactCompany'/></div>\
+								<div class='input text'><label for='EditContactName'>Name</label><input name='data[EditContact][name]' placeholder='Edit Name And Surname' class='nameInput input-field' type='text' id='EditContactName' value='"+data[i].Contact.name+"'/></div>\
+								<div class='input text'><label for='EditContactNumber'>Number</label><input name='data[EditContact][number]' placeholder='Edit Phone Number' class='phoneNumber input-field' type='text' id='EditContactNumber' value='"+data[i].Contact.number+"'/></div>\
+								<div class='input text'><label for='EditContactSecondNumber'>Second Number</label><input name='data[EditContact][secondNumber]' placeholder='Edit Second Phone Number' class='secondPhoneNumber input-field' type='text' id='EditContactSecondNumber' value='"+data[i].Contact.secondNumber+"'/></div>\
+								<div class='input text'><label for='EditContactAddress'>Address</label><input name='data[EditContact][address]' placeholder='Edit Address' class='addressInput input-field' type='text' id='EditContactAddress' value='"+data[i].Contact.address+"'/></div>\
+								<div class='input text'><label for='EditContactCompany'>Company</label><input name='data[EditContact][company]' placeholder='Edit Company' class='companyInput input-field' type='text' id='EditContactCompany' value='"+data[i].Contact.company+"'/></div>\
 								<input type='hidden' name='data[EditContact][contactId]' value='"+data[i].Contact.id+"' id='EditContactContactId'/>\
 								<div class='submit'><input type='submit' value='Save'/></div>\
 							</form>\
@@ -415,16 +413,16 @@
 				
 				$(".contacts").append(
 					"<div class='row text-right' data-function='openContact'>\
-						<div class='col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 text-left contact' data-function='created-date' data-timestamp='"+timestamp+"'>\
+						<div class='col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 text-left contact' data-function='created-date' data-timestamp='"+timestamp+"'>\
 							<i class='fas fa-sort-up arrow my-auto' id='arrow"+data[i].Contact.id+"'></i>\
 							<span class='contactName'>"+data[i].Contact.name+"</span> <span class='number'>- "+data[i].Contact.number+"</span><span class='createdDate' id='contact"+data[i].Contact.id+"'>"+timestamp+"</span>\
 							<form action='/Phonebook/Vendor/cakephp/cakephp/edit-contact' class='editContactForm' id='EditContactProfileForm' method='post' accept-charset='utf-8'>\
 								<div style='display:none;'><input type='hidden' name='_method' value='POST'/></div>\
-								<div class='input text'><label for='EditContactName'></label><input name='data[EditContact][name]' placeholder='Edit Name And Surname' class='nameInput input-field' type='text' id='EditContactName'/></div>\
-								<div class='input text'><label for='EditContactNumber'></label><input name='data[EditContact][number]' placeholder='Edit Phone Number' class='phoneNumber input-field' type='text' id='EditContactNumber'/></div>\
-								<div class='input text'><label for='EditContactSecondNumber'></label><input name='data[EditContact][secondNumber]' placeholder='Edit Second Phone Number' class='secondPhoneNumber input-field' type='text' id='EditContactSecondNumber'/></div>\
-								<div class='input text'><label for='EditContactAddress'></label><input name='data[EditContact][address]' placeholder='Edit Address' class='addressInput input-field' type='text' id='EditContactAddress'/></div>\
-								<div class='input text'><label for='EditContactCompany'></label><input name='data[EditContact][company]' placeholder='Edit Company' class='companyInput input-field' type='text' id='EditContactCompany'/></div>\
+								<div class='input text'><label for='EditContactName'>Name</label><input name='data[EditContact][name]' placeholder='Edit Name And Surname' class='nameInput input-field' type='text' id='EditContactName' value='"+data[i].Contact.name+"'/></div>\
+								<div class='input text'><label for='EditContactNumber'>Number</label><input name='data[EditContact][number]' placeholder='Edit Phone Number' class='phoneNumber input-field' type='text' id='EditContactNumber' value='"+data[i].Contact.number+"'/></div>\
+								<div class='input text'><label for='EditContactSecondNumber'>Second Number</label><input name='data[EditContact][secondNumber]' placeholder='Edit Second Phone Number' class='secondPhoneNumber input-field' type='text' id='EditContactSecondNumber' value='"+data[i].Contact.secondNumber+"'/></div>\
+								<div class='input text'><label for='EditContactAddress'>Address</label><input name='data[EditContact][address]' placeholder='Edit Address' class='addressInput input-field' type='text' id='EditContactAddress' value='"+data[i].Contact.address+"'/></div>\
+								<div class='input text'><label for='EditContactCompany'>Company</label><input name='data[EditContact][company]' placeholder='Edit Company' class='companyInput input-field' type='text' id='EditContactCompany' value='"+data[i].Contact.company+"'/></div>\
 								<input type='hidden' name='data[EditContact][contactId]' value='"+data[i].Contact.id+"' id='EditContactContactId'/>\
 								<div class='submit'><input type='submit' value='Save'/></div>\
 							</form>\

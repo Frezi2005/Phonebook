@@ -17,8 +17,11 @@ body {
 body {
 	background-image: url("../img/bg.jpg");
 	background-repeat: no-repeat;
-	background-size: 2000px;
 	background-position: -100px -30px;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 nav {
@@ -234,6 +237,11 @@ footer {
 	bottom: 0;
 }
 
+img {
+	width: 75px;
+	background: none;
+}
+
 #footer-text {
 	font-size: 20px;
 	line-height: 40px;
@@ -254,4 +262,5 @@ footer {
 	ul {
 		display: none;
 	}
+
 }

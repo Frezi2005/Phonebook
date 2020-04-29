@@ -90,8 +90,12 @@ class ContactController extends AppController {
 
 	public function addContact() {
 		$contact = $this->request->data['AddContact'];
-		
-		$this->Contact->save(array('id' => null, 'name' => $contact['name'], 'number' => $contact['number'], 'secondNumber' => $contact['secondNumber'], 'profilePicture' => '','userId' => $this->Session->read('uuid'), 'created' => '', 'modified' => '', 'isFavourite' => 0, 'address' => $contact['address'], 'company' => $contact['company']));
+
+		if(trim($contact['name']) != '' && trim($contact['number']) != '') {
+			$this->Contact->save(array('id' => null, 'name' => $contact['name'], 'number' => $contact['number'], 'secondNumber' => $contact['secondNumber'], 'profilePicture' => '','userId' => $this->Session->read('uuid'), 'created' => '', 'modified' => '', 'isFavourite' => 0, 'address' => $contact['address'], 'company' => $contact['company']));
+		} else {
+			$this->Flash->set("Contact cannot be empty.");
+		}
 		$this->redirect("/profile");
 	}
 
@@ -123,7 +127,6 @@ class ContactController extends AppController {
 		
 		$editContact = $this->request->data['EditContact'];
 		$this->Contact->read(null, $editContact['contactId']);
-		
 		foreach($editContact as $key => $field) {
 			
 			if (strlen($field) == 0) {
@@ -133,12 +136,13 @@ class ContactController extends AppController {
 			}
 		}
 
-		$this->Contact->set(array('modified' => date('Y-m-d H:i:s')));
-
-		$this->Contact->save();
-
-		$this->Flash->set("Your contact was edited.");
-
+		if(trim($editContact['name']) != '' && trim($editContact['number']) != '') {
+			$this->Contact->set(array('modified' => date('Y-m-d H:i:s')));
+			$this->Contact->save();
+			$this->Flash->set("Your contact was edited.");
+		} else {
+			$this->Flash->set("Input fields cannot be empty.");
+		}
 		$this->redirect("/profile");
 
 	}

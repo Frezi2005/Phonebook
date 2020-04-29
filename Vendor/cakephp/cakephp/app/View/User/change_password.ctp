@@ -16,8 +16,8 @@
     <div class="changeLogin">
         <?php
 
-        echo $this->Form->create('ChangeLogin', array('url' => '/change-login', 'type' => 'post', 'class' => 'changeLoginForm'));
-        echo $this->Form->input('newLogin', array('label' => '', 'placeholder' => 'Type in your new login', 'class' => 'loginInput'));
+        echo $this->Form->create('ChangePassword', array('url' => '/change-password', 'type' => 'post', 'class' => 'changePasswordForm'));
+        echo $this->Form->input('newPassword', array('label' => '', 'placeholder' => 'Type in your new password', 'class' => 'passwordInput'));
         echo $this->Form->end('Change');
 
         ?>

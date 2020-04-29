@@ -116,16 +116,18 @@ class UserController extends AppController {
 
 		$user = $this->request->data['Register'];
 		$this->User->set($this->request->data['Register']);
-
+		$this->BadLogin = $this->Components->load('BadLogin');
+		$this->BadLogin->validate($user['login']);
 		
-		if($this->User->validates()) {
+		if($this->User->validates() && $this->BadLogin->validate($user['login']) && $user['password'] != $user['login']) {
 			if($this->User->save(array('id' => null, 'username' => $user['login'], 'password' => hash("SHA384", md5($user['password'])), 'uuid' => CakeText::uuid()))) {
 				$this->Session->write("registerMessage", "Your account have been created succeselfully. You can login now!");
-				$this->redirect("/home");
 			}
-		} else {
-			debug($this->User->validationErrors);
-		}	
+		} else if(!$this->BadLogin->validate($user['login'])) {
+			$_SESSION['registerError'] = 'Your login has a curse word in it!';
+		} 
+
+		$this->redirect("/home");
 
 	}
 		
@@ -144,24 +146,20 @@ class UserController extends AppController {
 
 	}
 
-	public function changeLogin() {
+	public function changePassword() {
 		
-		$login = isset($this->request->data['ChangeLogin']) ? $this->request->data['ChangeLogin'] : null ;
+		$password = isset($this->request->data['ChangePassword']) ? $this->request->data['ChangePassword'] : null ;
 
-		$this->set('login', $login);
+		$this->set('login', $password);
 
 		$this->User->read(null, $_SESSION['uuid']);
 
-		if(isset($this->request->data['ChangeLogin'])) {
-			if(count($this->User->find('first', array('conditions' => array('username' => $login['newLogin'])))) == 0) {
-				$this->User->updateAll(
-					array('username' => "'".$login['newLogin']."'"), 
-					array('uuid' => $this->Session->read('uuid')));
-				$this->User->save();
-				$this->redirect("/profile");
-			} else {
-				echo "Username is not unique";
-			}
+		if(isset($this->request->data['ChangePassword'])) {
+			$this->User->updateAll(
+				array('password' => "'".hash("SHA384", md5($password['newPassword']))."'"), 
+				array('uuid' => $this->Session->read('uuid')));
+			$this->User->save();
+			$this->redirect("/profile");
 		}
 	}
 

@@ -33,7 +33,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </div>
     <nav>
         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 mx-auto">
-            <span class="logo my-auto">LOGO</span>
+            <span class="logo my-auto"><?=$this->Html->image('logo.png', array('alt' => 'CakePHP'));?></span>
             <ul>
                 <li><a href="home">Home</a></li>
                 <li><a href="about">About</a></li>

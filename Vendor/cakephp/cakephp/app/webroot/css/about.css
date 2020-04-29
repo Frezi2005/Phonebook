@@ -176,10 +176,6 @@ footer {
     	scrollbar-width: none; 
 	}
 
-	body::-webkit-scrollbar, html::-webkit-scrollbar {
-		display: none;
-	}
-
 	.name-message-container {
 		margin: auto;
 	}
@@ -199,6 +195,13 @@ footer {
 	
 	.menu {
 		display: block;
+	}
+}
+
+@media (max-width: 650px) {
+	.name-message-container {
+		width: 400px;
+		margin-bottom: 80px;
 	}
 }
 

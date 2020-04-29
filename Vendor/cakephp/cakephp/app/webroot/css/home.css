@@ -126,6 +126,10 @@ body {
 	background: transparent;
 }
 
+input[type=checkbox] {
+	margin-right: 10px;
+}
+
 input[type=submit] {
 	width: 85%;
 	padding: 10px 30px;
@@ -136,6 +140,7 @@ input[type=submit] {
 	border: 0;
 	outline: none;
 	border-radius: 30px;
+	margin-top: 40px;
 }
 
 .checkbox {
@@ -146,11 +151,12 @@ input[type=submit] {
 .login-form {
 	margin: auto;
 	transition: .5s;
+	margin-top: -30px;
 }
 
 .register-form {
 	margin-left: 450px;
-	margin-top: -227px;
+	margin-top: -205px;
 	transition: .5s;
 }
 
@@ -171,6 +177,16 @@ footer {
 	font-weight: bold;
 }
 
+.forms > p {
+	margin-top: 5px;
+	text-align: center;
+}
+
+.registerError {
+	color: red;
+	font-size: 15px;
+}
+
 @media (max-width: 1000px) {
 	.form-box {
 		top: 400px;
@@ -182,17 +198,10 @@ footer {
 
 	body,
 	html {
-		overflow: scroll;
-		-ms-overflow-style: none;
-		scrollbar-width: none;
+		overflow-y: scroll;
 	}
 
-	body::-webkit-scrollbar,
-	html::-webkit-scrollbar {
-		display: none;
-	}
-
-	.name-message-container {
+	name-message-container {
 		margin: auto;
 	}
 

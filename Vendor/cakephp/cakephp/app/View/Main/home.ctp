@@ -49,9 +49,11 @@
                         echo $this->Form->create('Register', array('type' => 'post', 'url' => '/register-user', 'class' => 'register-form inputs-group'));
                         echo $this->Form->input('login',array('placeholder' => 'Login', 'label' => '', 'class' => 'input-field'));
                         echo $this->Form->input('password',array('placeholder' => 'Password', 'label' => '', 'class' => 'input-field'));
-                        echo $this->Form->input('passwordConfirm',array('placeholder' => 'Confirm Password', 'label' => '', 'class' => 'input-field'));
+                        echo $this->Form->input('passwordConfirm',array('placeholder' => 'Confirm Password', 'label' => '', 'class' => 'input-field', 'type' => 'password'));
+                        echo "<span class='registerError'>".$this->Session->read("registerError")."</span>";
                         echo $this->Form->input('agreeToRules',array('label' => '<span>I agree to Terms & Conditions</span>', 'type' => 'checkbox', 'class' => 'check-box'));
-                        echo $this->Form->end('Register');
+                        echo $this->Form->end('Register*');
+                        echo "<p>*By clicking this button, you automatically consent to the <a href='personalData'>processing of personal data.</a></p>";
 
                     ?>
                 </div>
