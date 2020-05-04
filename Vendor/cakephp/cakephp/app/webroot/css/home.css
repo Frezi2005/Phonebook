@@ -46,7 +46,7 @@ body {
 	text-align: center;
 }
 
-.name-message-container {
+.message-container {
 	background: rgba(255, 255, 255, .85);
 	width: 380px;
 }
@@ -201,7 +201,7 @@ footer {
 		overflow-y: scroll;
 	}
 
-	name-message-container {
+	.message-container {
 		margin: auto;
 	}
 

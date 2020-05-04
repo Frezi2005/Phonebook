@@ -16,7 +16,7 @@
 <body>
     <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 mx-auto container">
         <div class="content">
-            <div class="name-message-container">
+            <div class="message-container">
                 <div class="name">Phone Book</div>
                 <hr class="horizontal-line">
                 <div class="message">
