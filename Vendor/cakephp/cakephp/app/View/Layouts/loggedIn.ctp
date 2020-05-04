@@ -33,9 +33,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </div>
     <nav>
         <div class="col-xl-10 mx-auto">
-            <span class="logo my-auto"><?=$this->Html->image('logo.png', array('alt' => 'CakePHP'));?></span>
+            <span class="logo my-auto"><a href="/Phonebook/Vendor/cakephp/cakephp/logout-user"><?=$this->Html->image('logo.png', array('alt' => 'CakePHP'));?></a></span>
             <ul>
-                <li><a href="/Phonebook/Vendor/cakephp/cakephp/home">Home</a></li>
+                <li><a href="/Phonebook/Vendor/cakephp/cakephp/logout-user">Home</a></li>
                 <li><a href="/Phonebook/Vendor/cakephp/cakephp/profile">Profile</a></li>
                 <li><a href="/Phonebook/Vendor/cakephp/cakephp/logout-user">Logout</a></li>
                 <li><a href="/Phonebook/Vendor/cakephp/cakephp/about">About</a></li>

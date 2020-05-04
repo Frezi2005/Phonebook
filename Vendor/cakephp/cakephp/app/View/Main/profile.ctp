@@ -25,7 +25,6 @@
 	<div class="searchBar">
 	<?php
 
-		echo $this->Form->create(false, array('type' => 'get', 'default' => false));
 		echo $this->Form->input('query', array('type' => 'text','id' => 'query', 'name' => 'query', 'label' => false, 'placeholder' => 'Search contact'));
 
 	?>

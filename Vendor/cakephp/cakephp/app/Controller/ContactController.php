@@ -136,7 +136,7 @@ class ContactController extends AppController {
 			}
 		}
 
-		if(trim($editContact['name']) != '' && trim($editContact['number']) != '') {
+		if(!empty(trim($editContact['name'])) && !empty(trim($editContact['number']))) {
 			$this->Contact->set(array('modified' => date('Y-m-d H:i:s')));
 			$this->Contact->save();
 			$this->Flash->set("Your contact was edited.");
@@ -150,7 +150,8 @@ class ContactController extends AppController {
 	public function sortAplhabeticAsc() {
 		$this->autoRender = false;
 		$contact = $this->Contact->find('all', array(
-			'order'=>array('`name`')
+			'order'=>array('`name`'),
+			'conditions'=>array("userId LIKE '".$_SESSION['uuid']."'")
 		));
 		return json_encode($contact);
 	}
@@ -158,7 +159,8 @@ class ContactController extends AppController {
 	public function sortAplhabeticDesc() {
 		$this->autoRender = false;
 		$contact = $this->Contact->find('all', array(
-			'order'=>array('`name` DESC')
+			'order'=>array('`name` DESC'),
+			'conditions'=>array("userId LIKE '".$_SESSION['uuid']."'")
 		));
 		return json_encode($contact);
 	}
@@ -166,7 +168,8 @@ class ContactController extends AppController {
 	public function sortDateAsc() {
 		$this->autoRender = false;
 		$contact = $this->Contact->find('all', array(
-			'order'=>array('`created`')
+			'order'=>array('`created`'),
+			'conditions'=>array("userId LIKE '".$_SESSION['uuid']."'")
 		));
 		return json_encode($contact);
 	}
@@ -174,7 +177,8 @@ class ContactController extends AppController {
 	public function sortDateDesc() {
 		$this->autoRender = false;
 		$contact = $this->Contact->find('all', array(
-			'order'=>array('`created` DESC')
+			'order'=>array('`created` DESC'),
+			'conditions'=>array("userId LIKE '".$_SESSION['uuid']."'")
 		));
 		return json_encode($contact);
 	}
@@ -182,7 +186,8 @@ class ContactController extends AppController {
 	public function sortFav() {
 		$this->autoRender = false;
 		$contact = $this->Contact->find('all', array(
-			'order'=>array('`isFavourite` DESC')
+			'order'=>array('`isFavourite` DESC'),
+			'conditions'=>array("userId LIKE '".$_SESSION['uuid']."'")
 		));
 		return json_encode($contact);
 	}
@@ -192,7 +197,7 @@ class ContactController extends AppController {
 		$this->autoRender = false;
 		if(!empty(trim($query))) {
 			$contacts = $this->Contact->find('all', array(
-				'conditions'=>array('`name` LIKE' => $query."%")
+				'conditions'=>array('`name` LIKE' => $query."% AND userId LIKE '".$_SESSION['uuid']."'"),
 			));
 			return json_encode($contacts);
 		}

@@ -46,6 +46,7 @@ nav ul li a {
 	color: white;
 }
 
+
 nav ul li a:hover {
 	color: white;
 	text-decoration: none;
@@ -139,6 +140,7 @@ nav ul {
 .name-message-container {
 	background: rgba(255, 255, 255, .85);
 	width: 380px;
+	margin-top: -500px;
 }
 
 
@@ -252,7 +254,7 @@ img {
 @media (max-width: 1000px) {
 	i.hamburger-menu {
 		display: block !important;
-		right: 30px;
+		right: 50px;
 	}
 	
 	.menu {
@@ -261,6 +263,10 @@ img {
 
 	ul {
 		display: none;
+	}
+
+	.name-message-container {
+		margin-top: -500px;
 	}
 
 }

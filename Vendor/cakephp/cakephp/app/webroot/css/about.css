@@ -176,21 +176,12 @@ footer {
     	scrollbar-width: none; 
 	}
 
-	.name-message-container {
-		margin: auto;
-	}
-
 	#footer-text {
 		font-size: 13px;
 	}
 
 	ul {
 		display: none;
-	}
-
-	i.hamburger-menu {
-		display: block !important;
-		right: 10px;
 	}
 	
 	.menu {

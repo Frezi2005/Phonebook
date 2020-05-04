@@ -119,13 +119,15 @@ class UserController extends AppController {
 		$this->BadLogin = $this->Components->load('BadLogin');
 		$this->BadLogin->validate($user['login']);
 		
-		if($this->User->validates() && $this->BadLogin->validate($user['login']) && $user['password'] != $user['login']) {
+		if($this->User->validates() && $this->BadLogin->validate($user['login']) && $this->BadLogin->validate($user['password']) && $user['password'] != $user['login']) {
 			if($this->User->save(array('id' => null, 'username' => $user['login'], 'password' => hash("SHA384", md5($user['password'])), 'uuid' => CakeText::uuid()))) {
 				$this->Session->write("registerMessage", "Your account have been created succeselfully. You can login now!");
 			}
 		} else if(!$this->BadLogin->validate($user['login'])) {
 			$_SESSION['registerError'] = 'Your login has a curse word in it!';
-		} 
+		} else if(!$this->BadLogin->validate($user['password'])) {
+			$_SESSION['registerError'] = 'Your password has a curse word in it!';
+		}
 
 		$this->redirect("/home");
 
@@ -133,6 +135,7 @@ class UserController extends AppController {
 		
 	public function logoutUser() {
 		$this->Session->delete("LoggedIn");
+		$this->Session->delete('loginError');
 
 		$this->redirect("/home");
 	}
