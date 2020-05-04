@@ -128,13 +128,14 @@ $(() => {
 	searchInput.keyup(function () {
 		$(".searchedContacts").children().remove();
 		let value = searchInput.val();
+		console.log(value);
 		if(value.trim() !== "") {
 			$.ajax({
 				url: 'http://localhost/Phonebook/Vendor/cakephp/cakephp/search/'+value,
 				type: 'GET',
 				dataType: 'json',
 				error: function (request, status, error) {
-
+					
 				}
 			}).done(function (data) {
 				for(var i = 0; i < data.length; i++) {

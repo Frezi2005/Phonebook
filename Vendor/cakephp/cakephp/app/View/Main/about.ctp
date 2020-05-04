@@ -5,6 +5,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
 
 echo $this->Html->css('about');
+echo $this->Html->css('base');
 
 echo $this->fetch('meta');
 echo $this->fetch('css');

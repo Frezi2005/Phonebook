@@ -41,10 +41,11 @@ class ContactController extends AppController {
 		parent::beforeFilter();
 		App::uses('CakeTime', 'Utility');
 		$this->loadModel('Contact');
-		if(empty($this->Session->Check('LoggedIn')))
+		if(empty($this->Session->Check('LoggedIn'))) {
 			$this->layout = 'default';		
-		else 
+		} else { 
 			$this->layout = 'loggedIn';
+		}
 	}
 
 /**
@@ -91,7 +92,7 @@ class ContactController extends AppController {
 	public function addContact() {
 		$contact = $this->request->data['AddContact'];
 
-		if(trim($contact['name']) != '' && trim($contact['number']) != '') {
+		if(!empty(trim($contact['name'])) && !empty(trim($contact['number']))) {
 			$this->Contact->save(array('id' => null, 'name' => $contact['name'], 'number' => $contact['number'], 'secondNumber' => $contact['secondNumber'], 'profilePicture' => '','userId' => $this->Session->read('uuid'), 'created' => '', 'modified' => '', 'isFavourite' => 0, 'address' => $contact['address'], 'company' => $contact['company']));
 		} else {
 			$this->Flash->set("Contact cannot be empty.");
@@ -195,10 +196,14 @@ class ContactController extends AppController {
 	public function searchContacts() {
 		$query = $this->params['query'];
 		$this->autoRender = false;
+		$conditions = array(
+			array('`name` LIKE' => $query."%"),
+			array('`userId` LIKE' => $_SESSION['uuid'])
+		);
 		if(!empty(trim($query))) {
-			$contacts = $this->Contact->find('all', array(
-				'conditions'=>array('`name` LIKE' => $query."% AND userId LIKE '".$_SESSION['uuid']."'"),
-			));
+			$contacts = $this->Contact->find('all', array('conditions' => $conditions));
+			$log = $this->Contact->getDataSource()->getLog(false, false);
+			$this->log(print_r($log, true));
 			return json_encode($contacts);
 		}
 		

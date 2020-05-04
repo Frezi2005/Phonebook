@@ -41,9 +41,9 @@ class MainController extends AppController {
 		parent::beforeFilter();
 		if(empty($this->Session->Check('LoggedIn'))) {
 			$this->layout = 'default';
-		}			
-		else 
+		} else {
 			$this->layout = 'loggedIn';
+		}
 	}
 
 	public $components = array('Paginator');
@@ -127,6 +127,8 @@ class MainController extends AppController {
 		$this->set('contacts', $data);
 		$this->set('name', $userName['User']['username']);
 		$this->set('totalContacts', count($contactsCount));
+
+		
 
 	}
 

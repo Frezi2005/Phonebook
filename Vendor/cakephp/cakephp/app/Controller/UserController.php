@@ -43,9 +43,9 @@ class UserController extends AppController {
 		App::uses('CakeText', 'Utility');
 		if(empty($this->Session->Check('LoggedIn'))) {
 			$this->layout = 'default';
-		}			
-		else 
+		} else { 
 			$this->layout = 'loggedIn';
+		}
 	}
 
 /**
@@ -142,7 +142,10 @@ class UserController extends AppController {
 
 	public function deleteUser() {
 
+		$this->loadModel('Contact');
+
 		$this->User->deleteAll(array('User.uuid' => $this->Session->read('uuid')), false);
+		$this->Contact->deleteAll(array('Contact.userId' => $this->Session->read('uuid')), false);
 		$this->Session->delete("LoggedIn");
 
 		$this->Session->read('uuid');

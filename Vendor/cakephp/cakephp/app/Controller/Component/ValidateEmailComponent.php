@@ -4,7 +4,7 @@ App::uses('Component', 'Controller');
 
 class ValidateEmailComponent extends Component {
     public function validateEmail($email){
-        //DODANY W CELACH NAUKOWYCH
+        //ADDED FOR SCIENTIFIC PURPOSES
         if(filter_var($email, FILTER_VALIDATE_EMAIL) === false){
             return false;
         }
