@@ -37,3 +37,26 @@ To edit contact you have to click contact you want to edit and it will expand. T
 
 You can make mark contact as a favourite one by clicking star icon next to it. You can tell if contact is favourite by color os that star. If its yellow then contact is favourite if star is black then contact is not favourite.
 
+## Subpages
+
+### About
+
+About subpage is for now filled with lorem ipsum.
+
+### Contact
+
+In contact subpage you can find contact details to me, the guy that created it.
+
+### Profile
+
+Profile subpage is page for your contacts library and your account info.
+
+### Logout
+
+I don't think that I have to explain what's on this page.
+
+### Home
+
+This subpage is basically the main page that you land on when you load the website. It contains login and register form.
+
+
